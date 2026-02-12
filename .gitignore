@@ -1,3 +1,8 @@
-Study/
+# Rust build files
+/target/
+
+# macOS system files
 .DS_Store
-target/
+
+# Generated output folder
+Study/
