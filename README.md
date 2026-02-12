@@ -2,11 +2,15 @@ StudyFlow
 
 A lightweight rule-based CLI tool written in Rust to automatically organize academic files into a structured directory system.
 
+
+
 Overview
 
 StudyFlow scans a selected folder (e.g. Downloads), applies custom keyword rules, detects file types, and builds a clean study-oriented structure automatically.
 
 It was developed as a practical automation tool and as a structured Rust learning project focused on file systems and command-line applications.
+
+
 
 Core Features
 
@@ -22,11 +26,14 @@ Duplicate-safe file moving
 
 Clean Git structure with proper .gitignore
 
+
+
 How It Works
 
 Rules are defined inside rules.txt using the format:
 
 Course_Name: keyword1, keyword2
+
 
 
 The program:
@@ -46,14 +53,16 @@ If no rule matches, files are placed in:
 
 Study/Unsorted/
 
+
+
 Demo
-Before
 
-Unstructured Downloads folder:
+<p align="center">
+  <img src="assets/before.png" width="45%" />
+  <img src="assets/after.png" width="45%" />
+</p>
 
-After
 
-Automatically organized output:
 
 Usage
 
@@ -62,9 +71,11 @@ Build the project:
 cargo build
 
 
+
 Preview changes safely:
 
 cargo run -- ~/Downloads --rules rules.txt --dry-run
+
 
 
 Organize files:
@@ -79,6 +90,8 @@ studyflow/
  ├── README.md
  └── Cargo.toml
 
+
+
 Technical Notes
 
 Written in Rust
@@ -88,6 +101,8 @@ Uses std::fs, PathBuf, and io::Result
 Structured CLI argument handling
 
 Designed as a modular automation tool
+
+
 
 Author
 
