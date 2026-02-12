@@ -1,100 +1,111 @@
-StudyFlow
+📦 StudyFlow
 
-A simple rule-based file organizer for students.
+A simple CLI tool written in Rust to automatically organize study files into structured folders based on custom rules.
 
-
-
-Why I built this
-
-As a student, my Downloads folder was always messy — lecture slides, exam PDFs, CV files, certificates, random images… everything mixed together.
-
-Organizing them manually takes time, especially during exam periods.
-
-So I built StudyFlow to automate this process.
+This was my first fully independent Rust project, built to practice file system handling, command-line parsing, and structured logic.
 
 
 
-What it does
+✨ What It Does
 
-StudyFlow is a command-line tool written in Rust.
+StudyFlow scans a folder (e.g. Downloads) and:
 
-It scans a folder (for example, Downloads), checks file names against keywords defined in a rules.txt file, and then moves the files into structured folders.
+Detects file type (PDF, images, archives, installers…)
 
+Matches filenames against custom rules
 
+Creates a structured folder hierarchy
 
-If a file matches a course rule, it goes into:
+Moves files accordingly
 
-Study/CourseName/FileType/
-
-
-If it doesn’t match anything, it goes into:
-
-Study/Unsorted/
+Supports a safe --dry-run mode
 
 
 
+🧠 Why I Built This
 
-Features
-
-Custom rules file (rules.txt)
-
-Automatic folder creation
-
-File type detection (PDFs, Images, Archives, etc.)
-
-Duplicate name handling
-
-Dry-run mode (preview changes before moving files)
-
-Move and skip counters
+As a student, I constantly download lecture slides, exam files, and notes.
+This project started as a practical solution to organize academic files — and became a hands-on way to deepen my understanding of Rust and CLI tools.
 
 
 
-Example rules.txt
-Health_Informatics: HI, Medicine, Musculoskeletal
-Foundations_of_Science: FoS, Physics, Unit
-CV_Job: lebenslauf, arbeitszeugnis
-Certificates_Admin: Mark Sheet, Betreff
+⚙️ How It Works
+
+1. Rules are defined inside rules.txt
+
+2. The program scans the input directory
+
+3. Files are categorized by:
+
+Course name (from rules)
+
+File type (PDFs, Images, Archives, etc.)
+
+4. Files are moved into:
+
+Study/<Course>/<Type>/
 
 
 
-How to run
+🚀 Usage
 
-Preview mode (recommended first):
+Build the project:
 
-cargo run -- ~/Downloads --rules rules.txt --dry-run
+cargo build
 
 
-Actual execution:
+Run normally:
 
 cargo run -- ~/Downloads --rules rules.txt
 
 
+Run in preview mode (safe test):
 
-Who is this for?
-
-University students
-
-Anyone who wants structured academic folders
-
-People who prefer local tools instead of cloud-based automation
+cargo run -- ~/Downloads --rules rules.txt --dry-run
 
 
 
-Possible future improvements
+📂 Example Output Structure
+Study/
+ ├── Foundations_of_Science/
+ │    ├── PDFs/
+ │    └── Archives/
+ ├── Health_Informatics/
+ │    └── PDFs/
+ ├── CV_Job/
+ │    └── PDFs/
+ └── Unsorted/
+      ├── Images/
+      ├── Installers/
+      └── Archives/
 
-GUI version
-
-Automatic scheduled runs
-
-Smarter file classification
-
-Pre-built binaries for easier distribution
 
 
+🛠️ Tech Stack
 
-Author
+Rust
 
-Sara Zarea
-Health Informatics Student
-Digital Business Project
+std::fs
+
+Command-line argument parsing
+
+File system manipulation
+
+Error handling with io::Result
+
+
+
+📌 Notes
+
+The Study/ folder is ignored in Git (.gitignore)
+
+Only source code is tracked
+
+Designed as a portfolio-ready CLI project
+
+
+
+👩‍💻 Author
+
+Sara Hany Zarea
+Bachelor’s Student – Medical Information Management
