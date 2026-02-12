@@ -5,7 +5,7 @@ Designed to automate messy Downloads folders for students.
 
 
 
-Overview
+### Overview
 
 StudyFlow scans a selected folder (e.g. Downloads), applies custom keyword rules, detects file types, and builds a clean study-oriented structure automatically.
 
@@ -13,7 +13,7 @@ It was developed as a practical automation tool and as a structured Rust learnin
 
 
 
-Core Features
+### Core Features
 
 Keyword-based course matching
 
@@ -29,7 +29,7 @@ Clean Git structure with proper .gitignore
 
 
 
-How It Works
+### How It Works
 
 Rules are defined inside rules.txt using the format:
 
@@ -37,7 +37,7 @@ Course_Name: keyword1, keyword2
 
 
 
-The program:
+### The program:
 
 Reads the rules file
 
@@ -68,7 +68,7 @@ Before vs After organizing the Downloads folder:
 
 
 
-Usage
+### Usage
 
 Build the project:
 
@@ -76,13 +76,13 @@ cargo build
 
 
 
-Preview changes safely:
+### Preview changes safely:
 
 cargo run -- ~/Downloads --rules rules.txt --dry-run
 
 
 
-Organize files:
+### Organize files:
 
 cargo run -- ~/Downloads --rules rules.txt
 
@@ -96,7 +96,7 @@ studyflow/
 
 
 
-Technical Notes
+### Technical Notes
 
 Written in Rust
 
