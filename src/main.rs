@@ -61,20 +61,11 @@ fn main() -> io::Result<()> {
     }
 
     let rules: Vec<CourseRule> = match rules_path {
-        Some(p) => match load_rules(&p) {
-            Ok(r) => {
-                println!("Loaded rules from: {}", p.display());
-                r
-            }
-            Err(e) => {
-                eprintln!("Failed to load rules: {e}");
-                return Ok(());
-            }
-        },
+        Some(p) => load_rules(&p)?,
         None => vec![],
     };
 
-    println!("StudyFlow");
+    println!("StudyFlow v0.1.0");
     println!("Input : {}", input_dir.display());
     println!("Output: {}", output_dir.display());
     println!("DryRun: {}", dry_run);
@@ -82,6 +73,7 @@ fn main() -> io::Result<()> {
 
     let mut moved = 0usize;
     let mut skipped = 0usize;
+    let mut unmatched = 0usize;
 
     for entry in fs::read_dir(&input_dir)? {
         let entry = match entry {
@@ -111,12 +103,16 @@ fn main() -> io::Result<()> {
             continue;
         }
 
-        let course = match_course(&rules, &filename)
-            .unwrap_or("Unsorted".to_string());
+        let course = match_course(&rules, &filename);
 
-        let file_type = file_type_folder(&path).to_string();
+        if course.is_none() {
+            unmatched += 1;
+        }
 
-        let dest_dir = output_dir.join(&course).join(&file_type);
+        let course_folder = course.unwrap_or("Unsorted".to_string());
+        let file_type = file_type_folder(&path);
+
+        let dest_dir = output_dir.join(&course_folder).join(file_type);
         let mut dest_path = dest_dir.join(&filename);
 
         if dest_path.exists() {
@@ -134,33 +130,33 @@ fn main() -> io::Result<()> {
         moved += 1;
     }
 
-    println!("\nDone ✅");
-    println!("Moved  : {}", moved);
-    println!("Skipped: {}", skipped);
+    println!("\nSummary Report");
+    println!("--------------");
+    println!("Files processed : {}", moved);
+    println!("Unmatched files : {}", unmatched);
+    println!("Skipped entries : {}", skipped);
 
     Ok(())
 }
 
 fn print_help() {
-    println!("StudyFlow - Study File Organizer");
+    println!("StudyFlow - Rule-based file organizer");
     println!();
     println!("Usage:");
-    println!("  cargo run -- <INPUT_DIR> --rules rules.txt [--dry-run] [--output Study]");
+    println!("cargo run -- <INPUT_DIR> --rules rules.txt [--dry-run]");
     println!();
-    println!("Examples:");
-    println!("  cargo run -- ~/Downloads --rules rules.txt --dry-run");
-    println!("  cargo run -- ~/Downloads --rules rules.txt");
-    println!("  cargo run -- ~/Downloads --rules rules.txt --output Study");
-    println!();
-    println!("Other:");
-    println!("  cargo run -- --version");
+    println!("Options:");
+    println!("--rules <file>   Path to rules file");
+    println!("--dry-run        Preview without moving files");
+    println!("--output <dir>   Custom output folder");
+    println!("--version        Show version");
 }
 
 fn match_course(rules: &[CourseRule], filename: &str) -> Option<String> {
     let name = filename.to_lowercase();
     for rule in rules {
         for kw in &rule.keywords {
-            if !kw.is_empty() && name.contains(kw) {
+            if name.contains(kw) {
                 return Some(rule.course.clone());
             }
         }
@@ -169,22 +165,14 @@ fn match_course(rules: &[CourseRule], filename: &str) -> Option<String> {
 }
 
 fn file_type_folder(path: &Path) -> &'static str {
-    let ext = path
-        .extension()
-        .and_then(|e| e.to_str())
-        .unwrap_or("")
-        .to_lowercase();
-
-    match ext.as_str() {
+    match path.extension().and_then(|e| e.to_str()).unwrap_or("").to_lowercase().as_str() {
         "pdf" => "PDFs",
         "ppt" | "pptx" => "Slides",
         "doc" | "docx" => "Documents",
-        "png" | "jpg" | "jpeg" | "gif" | "webp" => "Images",
-        "zip" | "rar" | "7z" | "tar" | "gz" => "Archives",
+        "png" | "jpg" | "jpeg" => "Images",
+        "zip" | "rar" => "Archives",
         "pkg" => "Installers",
-        "mov" | "mp4" | "mkv" => "Videos",
-        "txt" | "md" => "Notes",
-        "csv" | "xlsx" => "Data",
+        "mov" | "mp4" => "Videos",
         _ => "Other",
     }
 }
@@ -201,21 +189,20 @@ fn load_rules(path: &Path) -> io::Result<Vec<CourseRule>> {
 
         let mut parts = line.splitn(2, ':');
         let course = parts.next().unwrap_or("").trim();
-        let kws = parts.next().unwrap_or("").trim();
+        let keywords = parts.next().unwrap_or("").trim();
 
-        if course.is_empty() || kws.is_empty() {
+        if course.is_empty() || keywords.is_empty() {
             continue;
         }
 
-        let keywords: Vec<String> = kws
+        let keyword_list = keywords
             .split(',')
             .map(|k| k.trim().to_lowercase())
-            .filter(|k| !k.is_empty())
             .collect();
 
         rules.push(CourseRule {
             course: course.to_string(),
-            keywords,
+            keywords: keyword_list,
         });
     }
 
@@ -223,14 +210,14 @@ fn load_rules(path: &Path) -> io::Result<Vec<CourseRule>> {
 }
 
 fn unique_destination(dest: &Path) -> io::Result<PathBuf> {
-    let parent = dest.parent().unwrap_or(Path::new("."));
-    let stem = dest.file_stem().and_then(|s| s.to_str()).unwrap_or("file");
+    let parent = dest.parent().unwrap();
+    let stem = dest.file_stem().unwrap().to_string_lossy();
     let ext = dest.extension().and_then(|e| e.to_str());
 
-    for i in 1..=9999 {
+    for i in 1..1000 {
         let candidate = match ext {
-            Some(ext) => parent.join(format!("{stem}_{i}.{ext}")),
-            None => parent.join(format!("{stem}_{i}")),
+            Some(e) => parent.join(format!("{}_{}.{}", stem, i, e)),
+            None => parent.join(format!("{}_{}", stem, i)),
         };
         if !candidate.exists() {
             return Ok(candidate);
