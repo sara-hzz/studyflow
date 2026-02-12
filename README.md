@@ -1,50 +1,43 @@
 StudyFlow
 
-A rule-based command-line tool written in Rust that automatically organizes study files into a structured folder system.
+A lightweight rule-based CLI tool written in Rust to automatically organize academic files into a structured directory system.
 
-StudyFlow scans a directory (e.g. Downloads), matches filenames against custom rules, detects file types, and creates a clean academic structure in seconds.
+Overview
 
-Why StudyFlow?
+StudyFlow scans a selected folder (e.g. Downloads), applies custom keyword rules, detects file types, and builds a clean study-oriented structure automatically.
 
-As a student, my Downloads folder constantly fills up with:
+It was developed as a practical automation tool and as a structured Rust learning project focused on file systems and command-line applications.
 
-Lecture slides
+Core Features
 
-Exam questions
+Keyword-based course matching
 
-Certificates
+Automatic file type categorization (PDFs, Images, Archives, etc.)
 
-CV documents
+Fallback Unsorted folder
 
-Random images and archives
+Duplicate-safe file moving
 
-Instead of manually organizing everything, I built a small automation tool to handle it for me.
+--dry-run preview mode
 
-This project was built to practice:
-
-File system manipulation in Rust
-
-Command-line argument parsing
-
-Rule-based logic
-
-Error handling
-
-Structured program design
+Clean Git structure with proper .gitignore
 
 How It Works
 
-The program scans a given directory.
+Rules are defined inside rules.txt using the format:
 
-It reads matching rules from rules.txt.
+Course_Name: keyword1, keyword2
 
-It categorizes files by:
 
-Course name (based on keywords)
+The program:
 
-File type (PDFs, Images, Archives, etc.)
+Reads the rules file
 
-It moves files into:
+Scans the input directory
+
+Matches filenames against keywords
+
+Creates the following structure:
 
 Study/<Course>/<FileType>/
 
@@ -56,11 +49,11 @@ Study/Unsorted/
 Demo
 Before
 
-Files mixed inside Downloads:
+Unstructured Downloads folder:
 
 After
 
-Automatically structured output:
+Automatically organized output:
 
 Usage
 
@@ -69,61 +62,35 @@ Build the project:
 cargo build
 
 
-Run in preview mode (safe test):
+Preview changes safely:
 
 cargo run -- ~/Downloads --rules rules.txt --dry-run
 
 
-Run and organize files:
+Organize files:
 
 cargo run -- ~/Downloads --rules rules.txt
 
-Example Output Structure
-Study/
- ├── Foundations_of_Science/
- │    └── PDFs/
- ├── Health_Informatics/
- │    └── PDFs/
- ├── CV_Job/
- │    └── PDFs/
- ├── Certificates_Admin/
- │    └── PDFs/
- └── Unsorted/
-      ├── Images/
-      ├── Archives/
-      └── Other/
+Project Structure
+studyflow/
+ ├── src/
+ ├── rules.txt
+ ├── assets/
+ ├── README.md
+ └── Cargo.toml
 
-Technical Details
+Technical Notes
 
-Language: Rust
+Written in Rust
 
-Uses: std::fs, std::env, PathBuf
+Uses std::fs, PathBuf, and io::Result
 
-Handles duplicate filenames
+Structured CLI argument handling
 
-Supports dry-run mode
-
-Ignores hidden/system files
-
-Clean Git structure (.gitignore configured properly)
-
-Project Status
-
-This was my first fully independent Rust CLI project.
-The focus was on building a practical automation tool and structuring it cleanly as a portfolio-ready repository.
-
-Future improvements may include:
-
-Regex-based matching
-
-Configurable output directory
-
-JSON rule configuration
-
-Release binaries
+Designed as a modular automation tool
 
 Author
 
 Sara Hany Zarea
-Bachelor’s Student – Medical Information Management
-Interested in digital systems, automation, and structured data workflows.
+Medical Information Management Student
+Interested in digital systems and workflow automation
