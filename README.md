@@ -1,6 +1,7 @@
-StudyFlow
+# StudyFlow
 
-A lightweight rule-based CLI tool written in Rust to automatically organize academic files into a structured directory system.
+Rule-based CLI file organizer built in Rust.
+Designed to automate messy Downloads folders for students.
 
 
 
@@ -55,7 +56,10 @@ Study/Unsorted/
 
 
 
-Demo
+## Demo
+
+Before vs After organizing the Downloads folder:
+
 
 <p align="center">
   <img src="assets/before.png" width="45%" />
@@ -104,8 +108,8 @@ Designed as a modular automation tool
 
 
 
-Author
+## Author
 
-Sara Hany Zarea
-Medical Information Management Student
-Interested in digital systems and workflow automation
+Sara Hany Zarea  
+Medical Information Management Student  
+Interested in digital systems & workflow automation
