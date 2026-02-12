@@ -1,13 +1,11 @@
-# StudyFlow Rules
-# Format:
-# FolderName: keyword1, keyword2, keyword3
+# Foundations of Science
+Foundations_of_Science: FoS, Physics, Unit, Logarithm
 
-Digital_Business: digital business, dominik, boehler, bobs, github, rust
+# Health Informatics
+Health_Informatics: HI_, Medicine, Musculoskeletal
 
-Health_Informatics: hi_, hi medicine, hi_medicine, health informatics, medicine, musculoskeletal, foundations_of_health
+# CV & Job
+CV_Job: lebenslauf, arbeitszeugnis, cv
 
-Foundations_of_Science: fos, foundations of science, physics, logarithm, unit 2, unit2, slides accompanying, preparatory questions, exam
-
-CV_Job: lebenslauf, cv, arbeitszeugnis, cover letter, bewerbung
-
-Certificates_Admin: mark sheet, certificate, transcript, instructions written exam, betreff
+# Certificates & Admin
+Certificates_Admin: mark sheet, betreff, transcript
