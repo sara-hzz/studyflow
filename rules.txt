@@ -1,0 +1,13 @@
+# StudyFlow Rules
+# Format:
+# FolderName: keyword1, keyword2, keyword3
+
+Digital_Business: digital business, dominik, boehler, bobs, github, rust
+
+Health_Informatics: hi_, hi medicine, hi_medicine, health informatics, medicine, musculoskeletal, foundations_of_health
+
+Foundations_of_Science: fos, foundations of science, physics, logarithm, unit 2, unit2, slides accompanying, preparatory questions, exam
+
+CV_Job: lebenslauf, cv, arbeitszeugnis, cover letter, bewerbung
+
+Certificates_Admin: mark sheet, certificate, transcript, instructions written exam, betreff
