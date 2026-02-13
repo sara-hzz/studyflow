@@ -103,7 +103,7 @@ Before vs After organizing the Downloads folder:
 ## Live Terminal Output
 
 <p align="center">
-  <img src="studyflow-demo.png" width="80%" />
+  <img src="assets/terminal-demo.png" width="80%" />
 </p>
 
 
