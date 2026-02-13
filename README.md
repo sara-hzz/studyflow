@@ -1,62 +1,96 @@
 # StudyFlow
 
-Rule-based CLI file organizer built in Rust.
-Designed to automate messy Downloads folders for students.
+<p align="center">
+  <a href="https://sara-hzz.github.io/" target="_blank">
+    🌐 View Live Website
+  </a>
+</p>
+
+A rule-based CLI file organizer built in Rust.
+Designed to automate messy folders and improve structured digital workflows.
+
+###Overview
+
+StudyFlow scans a selected directory (e.g., Downloads), applies custom keyword rules, detects file types, and automatically builds a clean study-oriented structure.
+
+It was developed as:
+
+A practical automation tool
+
+A structured Rust learning project
+
+A developer workflow optimization experiment
+
+###Problem
+
+Students and developers often accumulate disorganized files in their Downloads folders.
+
+Manual sorting is repetitive, inefficient, and error-prone.
+
+StudyFlow automates this process using customizable rule-based matching.
+
+###Solution
+
+StudyFlow:
+
+Reads keyword rules from a configuration file
+
+Matches filenames against defined courses
+
+Categorizes files by type
+
+Builds a structured folder system automatically
+
+Target structure:
+
+Study/<Course>/<FileType>/
 
 
+Unmatched files are safely placed in:
 
-### Overview
+Study/Unsorted/
 
-StudyFlow scans a selected folder (e.g. Downloads), applies custom keyword rules, detects file types, and builds a clean study-oriented structure automatically.
-
-It was developed as a practical automation tool and as a structured Rust learning project focused on file systems and command-line applications.
-
-
-
-### Core Features
+###Core Features
 
 Keyword-based course matching
 
-Automatic file type categorization (PDFs, Images, Archives, etc.)
+Automatic file type categorization (PDFs, Images, Archives, Videos, etc.)
+
+Safe duplicate handling
 
 Fallback Unsorted folder
-
-Duplicate-safe file moving
 
 --dry-run preview mode
 
 Clean Git structure with proper .gitignore
 
-
-
-### How It Works
+###How It Works
 
 Rules are defined inside rules.txt using the format:
 
 Course_Name: keyword1, keyword2
 
 
+Example:
 
-### The program:
-
-Reads the rules file
-
-Scans the input directory
-
-Matches filenames against keywords
-
-Creates the following structure:
-
-Study/<Course>/<FileType>/
+Digital_Business: business, marketing
+Health_Informatics: HI, medicine
 
 
-If no rule matches, files are placed in:
+The program:
 
-Study/Unsorted/
+1. Loads rule definitions
 
+2. Scans the input directory
 
+3. Matches filenames against keywords
+
+4. Creates structured folders
+
+5. Moves files safely
 
 ## Demo
+
 
 Before vs After organizing the Downloads folder:
 
@@ -67,26 +101,30 @@ Before vs After organizing the Downloads folder:
 </p>
 
 
+### Installation
 
-### Usage
+Clone the repository:
+
+git clone https://github.com/sara-hzz/studyflow.git
+cd studyflow
+
 
 Build the project:
 
 cargo build
 
+### Usage
 
-
-### Preview changes safely:
+Preview changes safely:
 
 cargo run -- ~/Downloads --rules rules.txt --dry-run
 
 
-
-### Organize files:
+Organize files:
 
 cargo run -- ~/Downloads --rules rules.txt
 
-Project Structure
+### Project Structure
 studyflow/
  ├── src/
  ├── rules.txt
@@ -94,22 +132,23 @@ studyflow/
  ├── README.md
  └── Cargo.toml
 
-
-
-### Technical Notes
+### Technical Details
 
 Written in Rust
 
 Uses std::fs, PathBuf, and io::Result
 
-Structured CLI argument handling
+Modular CLI argument handling
 
-Designed as a modular automation tool
+Designed as a structured automation tool
 
+### Live Website
 
+Project presentation:
+https://sara-hzz.github.io/
 
-## Author
+# Author
 
-Sara Hany Zarea  
-Medical Information Management Student  
-Interested in digital systems & workflow automation
+Sara Hany Zarea
+Health Informatics Student
+Focused on workflow automation and structured digital systems
