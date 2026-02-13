@@ -100,6 +100,12 @@ Before vs After organizing the Downloads folder:
   <img src="assets/after.png" width="45%" />
 </p>
 
+## Live Terminal Output
+
+<p align="center">
+  <img src="studyflow-demo.png" width="80%" />
+</p>
+
 
 ### Installation
 
