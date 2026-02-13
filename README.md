@@ -48,13 +48,15 @@ StudyFlow:
 
 ### Target Structure
 
+```
 Study/<Course>/<FileType>/
-
+```
 
 Unmatched files are safely placed in:
 
+```
 Study/Unsorted/
-
+```
 
 ---
 
@@ -73,14 +75,16 @@ Study/Unsorted/
 
 Rules are defined inside `rules.txt` using the format:
 
+```
 Course_Name: keyword1, keyword2
-
+```
 
 ### Example
 
+```
 Digital_Business: business, marketing
 Health_Informatics: HI, medicine
-
+```
 
 ### Program Workflow
 
@@ -113,45 +117,80 @@ Health_Informatics: HI, medicine
 
 # 🚀 Installation & Run
 
-### 1️⃣ Clone the repository
+## 1️⃣ Clone the repository
 
 ```bash
 git clone https://github.com/sara-hzz/studyflow.git
 cd studyflow
-2️⃣ Build the optimized release version
+```
+
+## 2️⃣ Build the optimized release version
+
+```bash
 cargo build --release
+```
+
 The compiled binary will be located at:
 
+```
 target/release/studyflow
-3️⃣ Run the program
-Preview changes safely:
+```
+
+## 3️⃣ Run the program
+
+### Preview changes safely
+
+```bash
 cargo run -- ~/Downloads --rules rules.txt --dry-run
-Organize files:
+```
+
+### Organize files
+
+```bash
 cargo run -- ~/Downloads --rules rules.txt
-Run the optimized release binary:
+```
+
+### Run the optimized release binary
+
+```bash
 ./target/release/studyflow ~/Downloads --rules rules.txt
-Project Structure
+```
+
+---
+
+## Project Structure
+
+```
 studyflow/
  ├── src/
  ├── rules.txt
  ├── assets/
  ├── README.md
  └── Cargo.toml
-Technical Details
-Written in Rust
+```
 
-Uses std::fs, PathBuf, and io::Result
+---
 
-Modular CLI argument handling
+## Technical Details
 
-Designed as a structured automation tool
+- Written in Rust  
+- Uses `std::fs`, `PathBuf`, and `io::Result`  
+- Modular CLI argument handling  
+- Designed as a structured automation tool  
 
-Live Website
-Project presentation:
+---
+
+## Live Website
+
+Project presentation:  
 👉 https://sara-hzz.github.io/
 
-Author
-Sara Hany Zarea
-Health Informatics Student
-Focused on workflow automation and structured digital systems
+---
 
+# Author
+
+Sara Hany Zarea  
+
+Health Informatics Student  
+
+Focused on workflow automation and structured digital systems
